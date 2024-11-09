@@ -1,237 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thumbnail Visionary - AI Video Thumbnail Generator</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
-  <style>
-    /* Existing styles... */
-    .header-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #007bff;
-      text-align: center;
-      margin-top: 30px;
-      animation: fadeInUp 1.5s ease;
-    }
-    .animated-text {
-      font-size: 1.2rem;
-      font-weight: 400;
-      text-align: center;
-      margin-top: 20px;
-      animation: slideIn 1.5s ease;
-      color: #6c757d;
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideIn {
-      0% { opacity: 0; transform: translateX(-30px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-    .thumbnail-preview img {
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    .loading-spinner {
-      display: none;
-      width: 50px;
-      height: 50px;
-      border: 5px solid #ddd;
-      border-top: 5px solid #007bff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-/* About Section */
-.about-section {
-      background-color: #f0f8ff;
-      padding: 60px 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-text {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #333;
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    /* Features Section */
-    .features-section {
-      padding: 60px 0;
-    }
-
-    .feature-box {
-      background-color: #e1f5fe;
-      padding: 30px;
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .feature-box:hover {
-      transform: scale(1.05);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      color: #0066cc;
-    }
-
-    .feature-box h4 {
-      margin-top: 20px;
-      color: #00796b;
-      font-size: 1.5rem;
-    }
-
-    .feature-box p {
-      font-size: 1rem;
-      color: #333;
-    }
-
-    /* Section Titles */
-    .section-title {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #0066cc;
-      text-align: center;
-      margin-bottom: 30px;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: "";
-      width: 60px;
-      height: 3px;
-      background-color: #0066cc;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -10px;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 1.8rem;
-      }
-
-      .feature-box {
-        padding: 20px;
-      }
-
-      .feature-box h4 {
-        font-size: 1.2rem;
-      }
-
-      .feature-box p {
-        font-size: 0.9rem;
-      }
-    }
-
-    .contact-section {
-      background-color: #f8f9fa;
-      padding: 60px 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-text {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #333;
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .contact-form input, .contact-form textarea {
-      margin-bottom: 20px;
-    }
-
-    .contact-form button {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    /* Feedback Form */
-    .feedback-form {
-      background-color: #e1f5fe;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .feedback-form input, .feedback-form textarea {
-      margin-bottom: 15px;
-    }
-
-    .feedback-form button {
-      background-color: #0066cc;
-      color: #fff;
-    }
-
-    /* Footer Section */
-    .footer {
-      background-color: #007bff;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    .footer a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Thumbnail Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Thumbnail Visionary</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#feedback">Feedback</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+    <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Thumbnail Visionary</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#feedback">Feedback</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
   <!-- About Section -->
   <div class="container about-section animated-section">
     <h2 class="section-title">About Thumbnail Visionary</h2>
     <p class="about-text">Thumbnail Visionary is an AI-driven tool that automatically selects the most engaging frames from videos and enhances them for maximum viewer engagement. With emotion detection, scene analysis, and customizable branding, our platform ensures that each thumbnail resonates with your audience and boosts click-through rates.</p>
   </div>
-
+   <!-- Main Section -->
+   <div class="container my-5">
+    <h2>Upload Video to Generate Thumbnails</h2>
+    <input type="file" id="videoInput" accept="video/*" class="form-control mb-3">
+    <div class="row" id="thumbnailGallery"></div>
+</div>
   <!-- Features Section -->
   <div class="container features-section animated-section">
     <h2 class="section-title">Features</h2>
@@ -260,15 +74,7 @@
     <p class="animated-text">Creating Engaging, AI-Enhanced Thumbnails with Emotion Detection and Auto-Branding</p>
   </div>
 
-  <div class="container">
-    <form class="mb-5">
-      <div class="mb-3">
-        <label for="prompt" class="form-label">Enter a Description for Your Thumbnail</label>
-        <input id="imgprompt" type="text" class="form-control" placeholder="e.g., 'Exciting moment from a travel vlog'">
-      </div>
-      <button id="submitbtn" type="button" class="btn btn-primary">Generate Thumbnail</button>
-      <div class="loading-spinner" id="loadingSpinner"></div>
-    </form>
+
 
     <div class="row imageCont thumbnail-preview">
       <!-- Generated images will appear here -->
@@ -297,51 +103,15 @@
       <button type="submit" class="btn btn-primary">Submit Feedback</button>
     </form>
   </div>
+ 
 
-  <div class="footer">
-    <p>Designed by <a href="https://www.linkedin.com/in/ankit071105/" target="_blank">Ankit</a></p>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  <script>
-    $(document).ready(function () {
-      // Fade-in animation for sections on scroll
-      $(window).scroll(function () {
-        $('.animated-section').each(function () {
-          var sectionPos = $(this).offset().top;
-          var scrollPos = $(window).scrollTop();
-          var windowHeight = $(window).height();
-          if (scrollPos + windowHeight > sectionPos + 100) {
-            $(this).css({
-              opacity: 1,
-              transform: 'translateY(0)'
-            });
-          }
-        });
-      });
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Thumbnail Generator | Contact us at info@thumbnailgen.com</p>
+    </footer>
 
-      // Button click event
-      $("#submitbtn").on("click", function (e) {
-        e.preventDefault();
-        $("#loadingSpinner").show();
-        const promptTxt = $("#imgprompt").val();
-        fetch("/generateimages/" + encodeURIComponent(promptTxt))
-          .then(response => response.json())
-          .then(data => {
-            $("#loadingSpinner").hide();
-            const images = data.data;
-            let totalHtml = "";
-
-            images.forEach(image => {
-              totalHtml += `<div class="col-md-4 my-2">
-                <img src="${image.url}" alt="Generated Thumbnail" class="img-fluid w-100">
-              </div>`;
-            });
-
-            $(".imageCont").html(totalHtml);
-          });
-      });
-    });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
